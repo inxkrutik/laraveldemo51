@@ -13,6 +13,8 @@ class DashboardController extends Controller {
         $targetFile = time() . ".jpg";
         $disk = Storage::disk('s3');
         $disk->put($targetFile, fopen($sourceFile, 'r+'));
+        
+        echo "Image Successfully uploaded";exit;
     }
 
 }

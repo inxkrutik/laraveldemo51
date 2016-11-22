@@ -11,4 +11,4 @@
 |
 */
 
-Route::get('/', 'DashboardController@index');
+Route::get('/awss3upload', 'DashboardController@index');
