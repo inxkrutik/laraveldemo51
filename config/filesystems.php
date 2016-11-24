@@ -64,10 +64,10 @@ return [
 
         's3' => [
             'driver' => 's3',
-            'key'    => 'AKIAJLKIZ5JDYXJ4ECRA',
+            'key'    => 'AKIAIAEKX2SUXKWIMKRQ',
             'secret' => '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',
             'region' => 'us-east-1',
-            'bucket' => 'testingbucketinexture',
+            'bucket' => 'demokrutik',
         ],
 
         'rackspace' => [
