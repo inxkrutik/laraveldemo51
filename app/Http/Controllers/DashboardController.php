@@ -12,9 +12,11 @@ class DashboardController extends Controller {
         $sourceFile = "D:\Projects\wamp\www\laraveldemo51\public\images\s3.jpg";
         $targetFile = time() . ".jpg";
         $disk = Storage::disk('s3');
-        $disk->put($targetFile, fopen($sourceFile, 'r+'));
-        
-        echo "Image Successfully uploaded";exit;
+        $return = $disk->put($targetFile, fopen($sourceFile, 'r+'));
+        echo '<pre>';
+        print_r($return);
+        echo "Image Successfully uploaded";
+        exit;
     }
 
 }
