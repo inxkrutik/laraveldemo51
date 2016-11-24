@@ -13,3 +13,5 @@
 
 Route::get('/awss3upload', 'DashboardController@index');
 Route::get('/transcode', 'DashboardController@transcode');
+Route::get('/upload', 'DashboardController@upload');
+Route::post('/saveupload','DashboardController@showUploadFile');
