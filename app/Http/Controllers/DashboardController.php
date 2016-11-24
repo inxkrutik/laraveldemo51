@@ -19,4 +19,27 @@ class DashboardController extends Controller {
         exit;
     }
 
+    public function transcode() {
+        // Get cURL resource
+        $curl = curl_init();
+        // Set some options - we are passing in a useragent too here
+        $data = json_encode(array("input" => "s3://zencodertesting/test.mov"));
+        curl_setopt_array($curl, array(
+            CURLOPT_RETURNTRANSFER => 1,
+            CURLOPT_URL => 'https://app.zencoder.com/api/v2/jobs',
+            CURLOPT_POST => 1,
+            CURLOPT_POSTFIELDS => $data,
+            CURLOPT_HTTPHEADER => array('Content-Type:application/json', 'Zencoder-Api-Key:5531c5a2ed32b130498079ffb1e07943')
+        ));
+        
+        // Send the request & save response to $resp
+        $response = curl_exec($curl);
+        
+        // Close request to clear up some resources
+        curl_close($curl);
+        
+        var_dump($response);
+        exit;
+    }
+
 }

@@ -12,3 +12,4 @@
 */
 
 Route::get('/awss3upload', 'DashboardController@index');
+Route::get('/transcode', 'DashboardController@transcode');
