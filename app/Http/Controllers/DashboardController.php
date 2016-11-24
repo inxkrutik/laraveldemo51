@@ -23,7 +23,14 @@ class DashboardController extends Controller {
         // Get cURL resource
         $curl = curl_init();
         // Set some options - we are passing in a useragent too here
-        $data = json_encode(array("input" => "s3://zencodertesting/test.mov"));
+        $data = [];
+        $data["input"] = "s3://zencodertesting/test.mov";
+        $data["outputs"] = [];
+        $option = [];
+        $option["url"] = "https://s3.amazonaws.com/testingbucketinexture/Samplevideo_".time().".mp4";
+        $data["outputs"][] = $option;
+        $data = json_encode($data);
+        
         curl_setopt_array($curl, array(
             CURLOPT_RETURNTRANSFER => 1,
             CURLOPT_URL => 'https://app.zencoder.com/api/v2/jobs',
