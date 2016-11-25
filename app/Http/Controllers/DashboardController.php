@@ -35,7 +35,7 @@ class DashboardController extends Controller {
              
             if (isset($file) && !empty($file)) {
                 $fileName = $file->getClientOriginalName();                 
-                $pathOriginal =  asset("public/images/" . $fileName); 
+                $pathOriginal =  asset("images/" . $fileName); 
                 var_dump($pathOriginal); echo "\n";
                 $destinationPath = 'images';
                 $file->move($destinationPath,$file->getClientOriginalName());
