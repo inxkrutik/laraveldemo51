@@ -35,11 +35,11 @@ class DashboardController extends Controller {
              
             if (isset($file) && !empty($file)) {
                 $fileName = $file->getClientOriginalName();                 
-                $pathOriginal = public_path("images/ " . $fileName); 
-                var_dump($pathOriginal); 
+                $pathOriginal =  asset("public/images/" . $fileName); 
+                var_dump($pathOriginal); echo "\n";
                 $destinationPath = 'images';
                 $file->move($destinationPath,$file->getClientOriginalName());
-                echo "File uploaded successfully";
+                echo "File uploaded successfully";echo "\n";
 
                 // Get cURL resource
                 $curl = curl_init();
@@ -49,7 +49,6 @@ class DashboardController extends Controller {
                 $data["outputs"] = [];
                 $option = [];
                 $option["url"] = "https://s3.amazonaws.com/testingbucketinexture/".$Outputname.".mp4";
-                var_dump($option["url"]);
                 $data["outputs"][] = $option;
                 $data = json_encode($data);
                 var_dump($data);
