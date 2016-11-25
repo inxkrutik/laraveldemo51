@@ -20,7 +20,7 @@ class DashboardController extends Controller {
         $return = $disk->put($targetFile, fopen($sourceFile, 'r+'));
         echo '<pre>';
         print_r($return);
-        echo "Image Successfully uploaded";
+        echo "<br>Video Successfully uploaded";
         exit;
     }
 
