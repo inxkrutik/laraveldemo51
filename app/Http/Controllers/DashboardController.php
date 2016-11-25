@@ -81,7 +81,7 @@ class DashboardController extends Controller {
         $data["input"] = "https://s3.amazonaws.com/myresourcegrant/sample1.flv";
         $data["outputs"] = [];
         $option = [];
-        $option["url"] = "https://s3.amazonaws.com/myresourcegrant/sample.mp4";
+        $option["url"] = "https://s3.amazonaws.com/testingbucketinexture/sample.mp4";
         $data["outputs"][] = $option;
         $data = json_encode($data);
         
