@@ -35,7 +35,7 @@ class DashboardController extends Controller {
              
             if (isset($file) && !empty($file)) {
                 $fileName = $file->getClientOriginalName();                 
-                $pathOriginal = public_path("images\ " . $fileName); 
+                $pathOriginal = public_path("images/ " . $fileName); 
                 var_dump($pathOriginal); 
                 $destinationPath = 'images';
                 $file->move($destinationPath,$file->getClientOriginalName());
@@ -48,7 +48,7 @@ class DashboardController extends Controller {
                 $data["input"] =  $pathOriginal;  //"https://s3.amazonaws.com/myresourcegrant/sample1.flv";
                 $data["outputs"] = [];
                 $option = [];
-                $option["url"] = "https://s3.amazonaws.com/myresourcegrant/".$Outputname.".mp4";
+                $option["url"] = "https://s3.amazonaws.com/testingbucketinexture/".$Outputname.".mp4";
                 var_dump($option["url"]);
                 $data["outputs"][] = $option;
                 $data = json_encode($data);
