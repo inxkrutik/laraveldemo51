@@ -61,7 +61,7 @@ class DashboardController extends Controller {
                 $response = curl_exec($curl);
                 // Close request to clear up some resources
                 curl_close($curl);
-                return redirect()->away('https://s3.amazonaws.com/myresourcegrant/'.$Outputname.'.mp4');
+                return redirect()->away('https://s3.amazonaws.com/testingbucketinexture/'.$Outputname.'.mp4');
             }
         }
     }
