@@ -35,7 +35,8 @@ class DashboardController extends Controller {
              
             if (isset($file) && !empty($file)) {
                 $fileName = $file->getClientOriginalName();                 
-                $pathOriginal = public_path("images\ " . $fileName);  
+                $pathOriginal = public_path("images\ " . $fileName); 
+                var_dump($pathOriginal); 
                 $destinationPath = 'images';
                 $file->move($destinationPath,$file->getClientOriginalName());
                 echo "File uploaded successfully";
