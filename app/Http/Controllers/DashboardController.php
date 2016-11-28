@@ -52,7 +52,7 @@ class DashboardController extends Controller {
                 $data["input"] =  $pathOriginal;  //"https://s3.amazonaws.com/myresourcegrant/sample1.flv";
                 $data["outputs"] = [];
                 $option = [];
-                $option["url"] = "https://s3.amazonaws.com/testingbucketinexture/".$Outputname.".mp4";
+                $option["url"] = "https://s3.amazonaws.com/testingforresource/".$Outputname.".mp4";
                 $data["outputs"][] = $option;
                 $data = json_encode($data);
                 curl_setopt_array($curl, array(
@@ -68,7 +68,7 @@ class DashboardController extends Controller {
                 curl_close($curl);
 
                  
-                return redirect()->away('https://s3.amazonaws.com/testingbucketinexture/'.$Outputname.'.mp4');
+                return redirect()->away('https://s3.amazonaws.com/testingforresource/'.$Outputname.'.mp4');
             }
         }
     }
@@ -78,10 +78,10 @@ class DashboardController extends Controller {
         $curl = curl_init();
         // Set some options - we are passing in a useragent too here
         $data = [];
-        $data["input"] = "https://s3.amazonaws.com/myresourcegrant/sample1.flv";
+        $data["input"] = "https://s3.amazonaws.com/testingforresource/sample1.flv";
         $data["outputs"] = [];
         $option = [];
-        $option["url"] = "https://s3.amazonaws.com/testingbucketinexture/sample.mp4";
+        $option["url"] = "https://s3.amazonaws.com/testingforresource/sample.mp4";
         $data["outputs"][] = $option;
         $data = json_encode($data);
         
