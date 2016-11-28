@@ -68,7 +68,7 @@ class DashboardController extends Controller {
  
                 $data["outputs"][] = $option;
                 $data = json_encode($data);
-                var_dump($data);exit;
+                
                 curl_setopt_array($curl, array(
                     CURLOPT_RETURNTRANSFER => 1,
                     CURLOPT_URL => 'https://app.zencoder.com/api/v2/jobs',
