@@ -52,20 +52,23 @@ class DashboardController extends Controller {
                 $data["input"] =  $pathOriginal;  //"https://s3.amazonaws.com/myresourcegrant/sample1.flv";
                 $data["outputs"] = [];
                 $option = [];
-                $option["public"] = "true";
+                $option["public"] = true;
                 $option["url"] = "https://s3.amazonaws.com/testingforresource/".$Outputname.".mp4";
  
-                $option["thumbnails"]["label"] = "first";
-                $option["thumbnails"]["prefix"] = "thumbs";
-                $option["thumbnails"]["interval_in_frames"] = "120";
-                $option["thumbnails"]["base_url"] = "https://s3.amazonaws.com/testingforresource/";
-                $option["thumbnails"]["size"] = "338*192";
+                $thumbnail = [];
+                $thumbnail["label"] = "first";
+                $thumbnail["prefix"] = "thumbs";
+                $thumbnail["interval_in_frames"] = "120";
+                $thumbnail["base_url"] = "https://s3.amazonaws.com/testingforresource/";
+                $thumbnail["size"] = "338*192";
+
+                $option["thumbnails"][] = $thumbnail;
  
                 $option["credentials"] = "s3_production";
  
                 $data["outputs"][] = $option;
                 $data = json_encode($data);
- 
+                var_dump($data);exit;
                 curl_setopt_array($curl, array(
                     CURLOPT_RETURNTRANSFER => 1,
                     CURLOPT_URL => 'https://app.zencoder.com/api/v2/jobs',
