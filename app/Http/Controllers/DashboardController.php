@@ -55,14 +55,14 @@ class DashboardController extends Controller {
                 $option["public"] = true;
                 $option["url"] = "https://s3.amazonaws.com/testingforresource/".$Outputname.".mp4";
  
-                $thumbnail = [];
+              /*  $thumbnail = [];
                 $thumbnail["label"] = "first";
                 $thumbnail["prefix"] = "thumbs";
                 $thumbnail["interval_in_frames"] = "120";
                 $thumbnail["base_url"] = "https://s3.amazonaws.com/testingforresource/";
                 $thumbnail["size"] = "338*192";
 
-                $option["thumbnails"][] = $thumbnail;
+                $option["thumbnails"][] = $thumbnail;*/
  
                 $option["credentials"] = "s3_production";
  
