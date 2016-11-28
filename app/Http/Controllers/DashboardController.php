@@ -53,6 +53,7 @@ class DashboardController extends Controller {
                 $data["outputs"] = [];
                 $option = [];
                 $option["url"] = "https://s3.amazonaws.com/testingforresource/".$Outputname.".mp4";
+                $option["credentials"] = "s3_production";
                 $data["outputs"][] = $option;
                 $data = json_encode($data);
                 curl_setopt_array($curl, array(
