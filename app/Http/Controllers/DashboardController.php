@@ -10,6 +10,11 @@ use App\Http\Requests;
 use Input;
 use File;
 use Image;
+Use FFMpeg;
+use FFMpeg\Media\Video;
+use FFMpeg\Media\Frame;
+
+ 
 
 class DashboardController extends Controller {
 
@@ -47,7 +52,7 @@ class DashboardController extends Controller {
                 $data["input"] =  $pathOriginal;  //"https://s3.amazonaws.com/myresourcegrant/sample1.flv";
                 $data["outputs"] = [];
                 $option = [];
-                $option["url"] = "https://s3.amazonaws.com/testingbucketinexture/".$Outputname.".mp4";
+                $option["url"] = "https://s3.amazonaws.com/testingforresource/".$Outputname.".mp4";
                 $data["outputs"][] = $option;
                 $data = json_encode($data);
                 curl_setopt_array($curl, array(
@@ -61,6 +66,8 @@ class DashboardController extends Controller {
                 $response = curl_exec($curl);
                 // Close request to clear up some resources
                 curl_close($curl);
+
+                 
                 return redirect()->away('https://s3.amazonaws.com/testingbucketinexture/'.$Outputname.'.mp4');
             }
         }
@@ -95,5 +102,40 @@ class DashboardController extends Controller {
         var_dump($response);
         exit;
     }
+    public function getThumbnail(Request $request){
+       
+        $movie = Input::file('image');
+        
+        $ffmpeg = \FFMpeg\FFMpeg::create([
+            'ffmpeg.binaries'  => 'D:\Projects\wamp\www\laraveldemo51\vendor\bin\ffmpeg.exe',
+            'ffprobe.binaries' => 'D:\Projects\wamp\www\laraveldemo51\vendor\bin\ffprobe.exe' 
+        ]);
+        
+        $video = $ffmpeg->open($movie);
+        $video
+            ->filters()
+            ->resize(new FFMpeg\Coordinate\Dimension(50,50))
+            ->synchronize();
+        
+        $video
+        ->frame(FFMpeg\Coordinate\TimeCode::fromSeconds(2))
+        ->save('thubnail-10.jpg');
+        
+        echo "Thumbnail created successfully";
+      
+        $file =  public_path('thubnail-10.jpg'); 
+        $path1 = public_path('/images/new_file4.jpg');
+        $path2 = public_path('/images/new_file5.jpg');
+        Image::make($file)->resize(338, 192)->save($path1);
+        Image::make($file)->resize(750, 420)->save($path2);
+         
+    }
 
+    public function welcome(){
+        return view('welcome');
+    }
+
+    
 }
+
+ 
