@@ -64,10 +64,10 @@ return [
 
         's3' => [
             'driver' => 's3',
-            'key'    => 'AKIAJLKIZ5JDYXJ4ECRA',
-            'secret' => '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',
-            'region' => 'us-east-1',
-            'bucket' => 'myresourcegrant',
+            'key'    => 'AKIAJXJG5KSP2R5XIBRQ',
+            'secret' => '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',
+            'region' => 'Ireland',
+            'bucket' => 'mye3-files',
         ],
 
         'rackspace' => [
