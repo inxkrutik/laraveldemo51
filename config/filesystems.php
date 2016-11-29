@@ -66,7 +66,7 @@ return [
             'driver' => 's3',
             'key'    => 'AKIAJXJG5KSP2R5XIBRQ',
             'secret' => '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',
-            'region' => 'Ireland',
+            'region' => 'us-east-1',
             'bucket' => 'mye3-files',
         ],
 
