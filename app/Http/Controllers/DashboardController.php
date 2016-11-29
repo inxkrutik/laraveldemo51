@@ -47,9 +47,9 @@ class DashboardController extends Controller {
         $file_path1 = '/post/' . $request->name . '/';
         $file_path2 = '/post/thumbnail/' . $request->name . '/';        
 
-        $s3->put($file_path1.'original_'.$image_file_name, $image, 'public');
+        $s3->put($file_path1.'original_'.$image_file_name, $image->__toString(), 'public');
         $image->fit(300, 300);
-        $s3->put($file_path2.'medium_'.$image_file_name, $image, 'public');
+        $s3->put($file_path2.'medium_'.$image_file_name, $image->__toString(), 'public');
         
         return json_encode(array(
             'filename' => $image_file_name
