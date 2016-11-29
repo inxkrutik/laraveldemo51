@@ -17,3 +17,5 @@ Route::get('/upload', 'DashboardController@upload');
 Route::post('/saveupload','DashboardController@showUploadFile');
 Route::post('/thumbnail', 'DashboardController@getThumbnail');
 Route::get('/welcome', 'DashboardController@welcome');
+Route::post('/uploadimage','DashboardController@uploadFileToS3');
+Route::get('/uploadimage', 'DashboardController@uploadImage');
