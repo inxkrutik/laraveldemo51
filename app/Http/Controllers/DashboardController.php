@@ -17,7 +17,7 @@ use FFMpeg\Media\Frame;
 class DashboardController extends Controller {
 
     public function index() {
-        
+
         $disk = Storage::disk('s3');
 
         $targetFile1 = "/post/" . time() . "_s3.jpg";
@@ -40,16 +40,17 @@ class DashboardController extends Controller {
     }
 
     public function uploadFileToS3(Request $request) {
-        $image = Image::make($request->file('fileimage'));
         $s3 = Storage::disk('s3');
 
         $image_file_name = time() . '.jpg';
         $file_path1 = '/post/' . $request->name . '/';
-        $file_path2 = '/post/thumbnail/' . $request->name . '/';        
+        $file_path2 = '/post/thumbnail/' . $request->name . '/';
 
-        $s3->put($file_path1.'original_'.$image_file_name, $image->__toString(), 'public');
-        $image->fit(300, 300);
-        $s3->put($file_path2.'medium_'.$image_file_name, $image->__toString(), 'public');
+        $s3->put($file_path1.'original_'.$image_file_name, file_get_contents($request->file('fileimage')), 'public');
+
+        $image_thumb = Image::make($request->file('fileimage'))->fit(100, 100);
+        $image_thumb = $image_thumb->stream();
+        $s3->put($file_path2.'medium_'.$image_file_name, $image_thumb->__toString(), 'public');
         
         return json_encode(array(
             'filename' => $image_file_name
@@ -117,11 +118,25 @@ class DashboardController extends Controller {
         $curl = curl_init();
         // Set some options - we are passing in a useragent too here
         $data = [];
-        $data["input"] = "https://s3.amazonaws.com/testingforresource/sample1.flv";
+        $data["input"] = "https://s3.amazonaws.com/mye3/sample1.flv";
+
         $data["outputs"] = [];
         $option = [];
-        $option["url"] = "https://s3.amazonaws.com/testingforresource/sample.mp4";
+        $option["public"] = true;
+        $option["url"] = "https://s3.amazonaws.com/mye3/sample1.mp4";
+
+        //$option["thumbnails"] = [];
+        $thumbnail = [];
+        $thumbnail["filename"] = "thumb_".time();
+        $thumbnail["number"] = 1;
+        $thumbnail["base_url"] = "https://s3.amazonaws.com/mye3/";
+        $thumbnail["width"] = 338;
+        $thumbnail["height"] = 192;
+        $thumbnail["public"] = "true";
+        $option["thumbnails"] = $thumbnail;
+
         $data["outputs"][] = $option;
+
         $data = json_encode($data);
 
         curl_setopt_array($curl, array(
@@ -129,7 +144,7 @@ class DashboardController extends Controller {
             CURLOPT_URL => 'https://app.zencoder.com/api/v2/jobs',
             CURLOPT_POST => 1,
             CURLOPT_POSTFIELDS => $data,
-            CURLOPT_HTTPHEADER => array('Content-Type:application/json', 'Zencoder-Api-Key:5531c5a2ed32b130498079ffb1e07943')
+            CURLOPT_HTTPHEADER => array('Content-Type:application/json', 'Zencoder-Api-Key:1db2bc9a82f159a82e33e7a4f7854c15')
         ));
 
         // Send the request & save response to $resp
